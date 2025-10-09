@@ -1,17 +1,17 @@
-from django.http import HttpResponse
-import datetime
-import random
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView
+from .models import Book
 
-# 1 Функция — текущее время
-def current_time(request):
-    now = datetime.datetime.now()
-    return HttpResponse(f"Текущее время: {now.strftime('%Y-%m-%d %H:%M:%S')}")
+class BookListView(ListView):
+    model = Book
+    template_name = 'books/book_list.html'
+    context_object_name = 'books'
+    ordering = ['-created_at']
 
-# 2 Функция — генератор случайного числа
-def random_number(request):
-    number = random.randint(1, 100)  # генерируем число от 1 до 100
-    return HttpResponse(f"Случайное число: {number}")
+class BookDetailView(DetailView):
+    model = Book
+    template_name = 'books/book_detail.html'
+    context_object_name = 'book'
 
-# 3️ Функция — рассказ о себе
-def about_me(request):
-    return HttpResponse("Меня зовут Акбар. Я изучаю Python и Django. Люблю программирование и баскетбол.")
+    def get_object(self):
+        return get_object_or_404(Book, pk=self.kwargs.get('pk'))
