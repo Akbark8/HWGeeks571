@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ book.title }}</title>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p><strong>Автор:</strong> {{ book.author }}</p>
+    <p><strong>Страницы:</strong> {{ book.quantity_page }}</p>
+    <p>{{ book.description }}</p>
+    <img src="{{ book.image.url }}" alt="{{ book.title }}" style="max-width:200px;">
+
+    <h2>Отзывы</h2>
+    <ul>
+        {% for review in book.reviews.all %}
+            <li>{{ review.rating }}★ — {{ review.text }}</li>
+        {% empty %}
+            <li>Нет отзывов</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Оставить отзыв</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+
+    <p><a href="{% url 'book_list' %}">← Назад к списку книг</a></p>
+</body>
+</html>
