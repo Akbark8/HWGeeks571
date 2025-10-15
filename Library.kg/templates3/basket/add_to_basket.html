@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить книгу в корзину</title>
+</head>
+<body>
+<h1>Добавить книгу в корзину</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label>Покупатель:</label>
+        <select name="customer">
+            {% for customer in customers %}
+            <option value="{{ customer.id }}">{{ customer.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label>Книга:</label>
+        <select name="book">
+            {% for book in books %}
+            <option value="{{ book.id }}">{{ book.title }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label>Количество:</label>
+        <input type="number" name="quantity" value="1" min="1">
+    </p>
+
+    <button type="submit">Добавить в корзину</button>
+</form>
+
+<p><a href="{% url 'basket_list' %}">← Вернуться в корзину</a></p>
+
+<h1>Изменить количество</h1>
+<form method="post">
+    {% csrf_token %}
+    <label>Количество:</label>
+    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+    <button type="submit">Сохранить</button>
+</form>
+<a href="{% url 'basket_list' %}">Назад</a>
+
+<h1>Удалить товар из корзины</h1>
+<p>Вы уверены, что хотите удалить "{{ item.book.title }}" у "{{ item.customer.name }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить</button>
+    <a href="{% url 'basket_list' %}">Отмена</a>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<h1>Регистрация</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.username.label_tag }} {{ form.username }}
+    {{ form.password.label_tag }} {{ form.password }}
+    {{ form.password2.label_tag }} {{ form.password2 }}
+
+    {{ form.full_name.label_tag }} {{ form.full_name }}
+    {{ form.date_of_birth.label_tag }} {{ form.date_of_birth }}
+    {{ form.email.label_tag }} {{ form.email }}
+    {{ form.phone.label_tag }} {{ form.phone }}
+    {{ form.address.label_tag }} {{ form.address }}
+    {{ form.github.label_tag }} {{ form.github }}
+    {{ form.linkedin.label_tag }} {{ form.linkedin }}
+    {{ form.portfolio.label_tag }} {{ form.portfolio }}
+    {{ form.experience.label_tag }} {{ form.experience }}
+    {{ form.skills.label_tag }} {{ form.skills }}
+
+    {{ form.captcha.label_tag }} {{ form.captcha }}
+
+    <button type="submit">Зарегистрироваться</button>
+</form>
+<a href="{% url 'login' %}">Войти</a>
