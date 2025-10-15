@@ -1,7 +1,11 @@
-<h1>Вход</h1>
+<h1>Авторизация</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.non_field_errors }}
+
+    <p>{{ form.username.label_tag }} {{ form.username }}</p>
+    <p>{{ form.password.label_tag }} {{ form.password }}</p>
+    <p>{{ form.captcha }}</p>
+
     <button type="submit">Войти</button>
 </form>
-<a href="{% url 'register' %}">Регистрация</a>
