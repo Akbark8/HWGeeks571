@@ -1,3 +1,4 @@
-<h1>Добро пожаловать, {{ user.username }}</h1>
-<p>Ваши инициалы: {{ user.get_full_name|default:user.username }}</p>
+<h1>Добро пожаловать, {{ user.username }}!</h1>
+<p>Вы успешно вошли в систему.</p>
+
 <a href="{% url 'logout' %}">Выйти</a>
